@@ -1,3 +1,4 @@
+const mainContainer = document.querySelector('.main-container');
 let myLibrary = [];
 
 
@@ -24,7 +25,32 @@ function addBookToLibrary() {
     console.log(myLibrary);
 }
 
-function displayBooks(){
+function displayBooks() {
+    for (let bookNumber in myLibrary) {
+        let cardDiv=document.createElement("div");
+
+        let tileDiv = document.createElement("div");
+        let authorDiv = document.createElement("div");
+        let pagesDiv = document.createElement("div");
+        let readDiv = document.createElement("div");
+
+        tileDiv.textContent=myLibrary[bookNumber].title;
+        authorDiv.textContent=myLibrary[bookNumber].author;
+        pagesDiv.textContent=myLibrary[bookNumber].pages;
+        readDiv.textContent=myLibrary[bookNumber].read;
+
+        cardDiv.classList.add('book-card');
+
+        cardDiv.appendChild(tileDiv);
+        cardDiv.appendChild(authorDiv);
+        cardDiv.appendChild(pagesDiv);
+        cardDiv.appendChild(readDiv);
+
+        mainContainer.appendChild(cardDiv);
+        console.log(myLibrary[bookNumber]);
+    }
+
 
 }
+
 
