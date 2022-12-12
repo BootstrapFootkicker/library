@@ -24,5 +24,7 @@ function addBookToLibrary() {
     console.log(myLibrary);
 }
 
+function displayBooks(){
 
-addBookToLibrary()
+}
+
