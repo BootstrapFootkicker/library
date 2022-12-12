@@ -1,7 +1,7 @@
 const mainContainer = document.querySelector('.main-container');
-const addBookButton=document.querySelector('#addBook');
+const addBookButton = document.querySelector('#addBook');
 let myLibrary = [];
-
+let childList = mainContainer.querySelectorAll('.book-card')
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -23,24 +23,28 @@ function addBookToLibrary() {
     read = read === "yes";
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    console.log(myLibrary);
+
     displayBooks();
 }
 
-function displayBooks() {
+function clearDiv(div) {
+    div.innerHTML = ""
+}
 
+function displayBooks() {
+    clearDiv(mainContainer);
     for (let bookNumber in myLibrary) {
-        let cardDiv=document.createElement("div");
+        let cardDiv = document.createElement("div");
 
         let tileDiv = document.createElement("div");
         let authorDiv = document.createElement("div");
         let pagesDiv = document.createElement("div");
         let readDiv = document.createElement("div");
 
-        tileDiv.textContent=myLibrary[bookNumber].title;
-        authorDiv.textContent=myLibrary[bookNumber].author;
-        pagesDiv.textContent=myLibrary[bookNumber].pages;
-        readDiv.textContent=myLibrary[bookNumber].read;
+        tileDiv.textContent = myLibrary[bookNumber].title;
+        authorDiv.textContent = myLibrary[bookNumber].author;
+        pagesDiv.textContent = myLibrary[bookNumber].pages;
+        readDiv.textContent = myLibrary[bookNumber].read;
 
         cardDiv.classList.add('book-card');
 
@@ -50,11 +54,12 @@ function displayBooks() {
         cardDiv.appendChild(readDiv);
 
         mainContainer.appendChild(cardDiv);
-        console.log(myLibrary[bookNumber]);
+
     }
 
 
 }
 
+addBookButton.addEventListener('click', addBookToLibrary)
 
-addBookButton.addEventListener('click',addBookToLibrary)
+
