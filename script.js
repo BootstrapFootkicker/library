@@ -1,4 +1,5 @@
 const mainContainer = document.querySelector('.main-container');
+const addBookButton=document.querySelector('#addBook');
 let myLibrary = [];
 
 
@@ -23,9 +24,11 @@ function addBookToLibrary() {
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
     console.log(myLibrary);
+    displayBooks();
 }
 
 function displayBooks() {
+
     for (let bookNumber in myLibrary) {
         let cardDiv=document.createElement("div");
 
@@ -54,3 +57,4 @@ function displayBooks() {
 }
 
 
+addBookButton.addEventListener('click',addBookToLibrary)
