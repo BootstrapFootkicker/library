@@ -24,3 +24,22 @@
 
 }
 
+.pop-up-form {
+    display: flex;
+    flex-direction: column;
+    border: solid black 2px;
+    padding: 20px;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 35%;
+    width: 10%;
+
+}
+
+label {
+    display: flex;
+    gap: 10px;
+}

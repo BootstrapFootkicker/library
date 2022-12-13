@@ -1,7 +1,7 @@
 const mainContainer = document.querySelector('.main-container');
 const addBookButton = document.querySelector('#addBook');
 let myLibrary = [];
-let childList = mainContainer.querySelectorAll('.book-card')
+
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -60,6 +60,49 @@ function displayBooks() {
 
 }
 
+function createForm() {
+    let formDiv = document.createElement('form');
+
+
+    let titleDiv = document.createElement("input");
+    titleDiv.setAttribute("type", "text")
+    titleDiv.setAttribute("placeholder", "Title");
+
+
+    let authorDiv = document.createElement("input");
+    authorDiv.setAttribute("type", "text")
+    authorDiv.setAttribute("placeholder", "Author");
+
+    let pagesDiv = document.createElement("input");
+    pagesDiv.setAttribute("type", "number")
+    pagesDiv.setAttribute("placeholder", "Pages");
+
+    let readLabel = document.createElement("label");
+    readLabel.setAttribute('for', 'read');
+    readLabel.appendChild(document.createTextNode("Have you read it?"))
+
+    let readDiv = document.createElement("input");
+    readDiv.setAttribute("type", "checkbox");
+    readDiv.setAttribute("id", "read");
+
+
+    let submitButton = document.createElement("input");
+    submitButton.setAttribute("type", "submit");
+
+    formDiv.classList.add('pop-up-form');
+    formDiv.appendChild(titleDiv);
+    formDiv.appendChild(authorDiv);
+    formDiv.appendChild(pagesDiv);
+    readLabel.appendChild(readDiv)
+    formDiv.appendChild(readLabel)
+    formDiv.appendChild(submitButton);
+
+
+    return formDiv;
+
+}
+
 addBookButton.addEventListener('click', addBookToLibrary)
 
-
+let test = createForm();
+mainContainer.appendChild(test)
