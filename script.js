@@ -14,13 +14,8 @@ Book.prototype.info = function () {
     return (`${this.title} by ${this.author}, ${this.pages}. pages read = ${this.read}`);
 }
 
-function addBookToLibrary() {
-    let title = prompt("What is the title of your book?");
-    let author = prompt("Who is the author of this book?");
-    let pages = prompt('How many pages does this book have?');
-    let read = prompt("Did you already read this book?").toLowerCase();
+function addBookToLibrary(title, author, pages, read) {
 
-    read = read === "yes";
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
 
@@ -60,6 +55,14 @@ function displayBooks() {
 
 }
 
+function submit(event, title, author, pages, read) {
+
+    addBookToLibrary(title, author, pages, read);
+    event.preventDefault();
+
+
+}
+
 function createForm() {
     let formDiv = document.createElement('form');
 
@@ -88,6 +91,9 @@ function createForm() {
 
     let submitButton = document.createElement("input");
     submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", 'submit')
+    submitButton.addEventListener('click', () => submit('submit book', titleDiv.value,
+        authorDiv.value, pagesDiv.value, document.querySelector('#read').checked));
 
     formDiv.classList.add('pop-up-form');
     formDiv.appendChild(titleDiv);
@@ -102,7 +108,9 @@ function createForm() {
 
 }
 
-addBookButton.addEventListener('click', addBookToLibrary)
+addBookButton.addEventListener('click', () => {
+    let popUpDiv = createForm();
+    mainContainer.appendChild(popUpDiv);
+})
 
-let test = createForm();
-mainContainer.appendChild(test)
+
