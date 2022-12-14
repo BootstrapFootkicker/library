@@ -34,9 +34,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
     height: 35%;
     width: 10%;
+    background-color: #F1F6F5;
+    z-index: 10;
+    transition: 200ms ease-in-out;
+
 
 }
 
@@ -45,9 +49,25 @@ label {
     gap: 10px;
 }
 
-.open{
-    display: block;
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    transition: 200ms ease-in-out;
+    pointer-events: none;
+
 }
-.close{
-    display:none;
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+
+}
+
+.pop-up-form.active {
+    transform: translate(-50%, -50%) scale(1);
 }
