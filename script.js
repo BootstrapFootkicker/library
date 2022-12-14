@@ -30,6 +30,9 @@ function clearDiv(div) {
 function createForm() {
 
     let formDiv = document.createElement('form');
+    formDiv.setAttribute('id','formDiv')
+
+    let divContents=document.createElement('div');
 
 
     let titleDiv = document.createElement("input");
@@ -60,13 +63,14 @@ function createForm() {
     submitButton.addEventListener('click', () => submit('submit book', titleDiv.value,
         authorDiv.value, pagesDiv.value, document.querySelector('#read').checked));
 
-    formDiv.classList.add('pop-up-form');
-    formDiv.appendChild(titleDiv);
-    formDiv.appendChild(authorDiv);
-    formDiv.appendChild(pagesDiv);
+    divContents.classList.add('pop-up-form');
+    divContents.appendChild(titleDiv);
+    divContents.appendChild(authorDiv);
+    divContents.appendChild(pagesDiv);
     readLabel.appendChild(readDiv)
-    formDiv.appendChild(readLabel)
-    formDiv.appendChild(submitButton);
+    divContents.appendChild(readLabel)
+    divContents.appendChild(submitButton);
+    formDiv.appendChild(divContents);
 
 
     return formDiv;
@@ -121,6 +125,7 @@ function submit(event, title, author, pages, read) {
         read = "Not Read";
     }
     addBookToLibrary(title, author, pages, read);
+    addBookButton.disabled=false;
     event.preventDefault();
 
 
@@ -155,6 +160,15 @@ function removeBook() {
 addBookButton.addEventListener('click', () => {
     let popUpDiv = createForm();
     mainContainer.appendChild(popUpDiv);
+    addBookButton.disabled=true;
+
 })
 
+function removePopup(){
+let formDiv=document.querySelector('#formDiv');
+formDiv.remove();
+addBookButton.disabled=false
+    console.log("it worked!")
+}
 
+mainContainer.addEventListener('click',removePopup)
