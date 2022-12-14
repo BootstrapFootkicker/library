@@ -26,68 +26,6 @@ function clearDiv(div) {
     div.innerHTML = ""
 }
 
-function displayBooks() {
-    clearDiv(mainContainer);
-    for (let bookNumber in myLibrary) {
-        let cardDiv = document.createElement("div");
-
-
-        let tileDiv = document.createElement("div");
-        let authorDiv = document.createElement("div");
-        let pagesDiv = document.createElement("div");
-        let readDiv = document.createElement("button");
-        let removeButton = document.createElement("button")
-
-        tileDiv.setAttribute('id', 'titleDiv' + bookNumber.toString());
-
-        removeButton.textContent = "Remove";
-        removeButton.setAttribute('id', 'removeButton' + bookNumber.toString());
-        removeButton.addEventListener("click", removeBook);
-
-        tileDiv.textContent = myLibrary[bookNumber].title;
-        authorDiv.textContent = myLibrary[bookNumber].author;
-        pagesDiv.textContent = myLibrary[bookNumber].pages;
-        readDiv.textContent = myLibrary[bookNumber].read;
-
-        cardDiv.classList.add('book-card');
-
-        cardDiv.appendChild(tileDiv);
-        cardDiv.appendChild(authorDiv);
-        cardDiv.appendChild(pagesDiv);
-        cardDiv.appendChild(readDiv);
-        cardDiv.appendChild(removeButton);
-
-        mainContainer.appendChild(cardDiv);
-
-    }
-
-
-}
-
-function submit(event, title, author, pages, read) {
-    if (read === true) {
-        read = 'Read';
-    } else {
-        read = "Not Read";
-    }
-    addBookToLibrary(title, author, pages, read);
-    event.preventDefault();
-
-
-}
-
-
-function removeBook() {
-    let id = this.id.toString().slice(-1);
-    let selector = '#titleDiv' + id;
-    let bookName = document.querySelector(selector).textContent;
-    let isTitle = (element) => element.title===bookName;
-    let bookIndex = myLibrary.findIndex(isTitle);
-    myLibrary.splice(bookIndex,1);
-    displayBooks();
-
-}
-
 
 function createForm() {
 
@@ -134,6 +72,85 @@ function createForm() {
     return formDiv;
 
 }
+
+function displayBooks() {
+    clearDiv(mainContainer);
+    for (let bookNumber in myLibrary) {
+        let cardDiv = document.createElement("div");
+
+
+        let tileDiv = document.createElement("div");
+        let authorDiv = document.createElement("div");
+        let pagesDiv = document.createElement("div");
+        let readDiv = document.createElement("button");
+        let removeButton = document.createElement("button")
+
+        tileDiv.setAttribute('id', 'titleDiv' + bookNumber.toString());
+
+        removeButton.textContent = "Remove";
+        removeButton.setAttribute('id', 'removeButton' + bookNumber.toString());
+        removeButton.addEventListener("click", removeBook);
+
+        readDiv.setAttribute('id', 'toggleRead' + bookNumber.toString());
+        readDiv.addEventListener("click", ChangeReadStatus);
+
+        tileDiv.textContent = myLibrary[bookNumber].title;
+        authorDiv.textContent = myLibrary[bookNumber].author;
+        pagesDiv.textContent = myLibrary[bookNumber].pages;
+        readDiv.textContent = myLibrary[bookNumber].read;
+
+        cardDiv.classList.add('book-card');
+
+        cardDiv.appendChild(tileDiv);
+        cardDiv.appendChild(authorDiv);
+        cardDiv.appendChild(pagesDiv);
+        cardDiv.appendChild(readDiv);
+        cardDiv.appendChild(removeButton);
+
+        mainContainer.appendChild(cardDiv);
+
+    }
+
+
+}
+
+function submit(event, title, author, pages, read) {
+    if (read === true) {
+        read = 'Read';
+    } else {
+        read = "Not Read";
+    }
+    addBookToLibrary(title, author, pages, read);
+    event.preventDefault();
+
+
+}
+
+function ChangeReadStatus() {
+    let id = this.id.toString().slice(-1);
+    let selector = '#titleDiv' + id;
+    let bookName = document.querySelector(selector).textContent;
+    let isTitle = (element) => element.title === bookName;
+    let bookIndex = myLibrary.findIndex(isTitle);
+    if (myLibrary[bookIndex].read === 'Read') {
+        myLibrary[bookIndex].read = "Not Read"
+    } else {
+        myLibrary[bookIndex].read = "Read";
+    }
+    displayBooks();
+}
+
+function removeBook() {
+    let id = this.id.toString().slice(-1);
+    let selector = '#titleDiv' + id;
+    let bookName = document.querySelector(selector).textContent;
+    let isTitle = (element) => element.title === bookName;
+    let bookIndex = myLibrary.findIndex(isTitle);
+    myLibrary.splice(bookIndex, 1);
+    displayBooks();
+
+}
+
 
 addBookButton.addEventListener('click', () => {
     let popUpDiv = createForm();
