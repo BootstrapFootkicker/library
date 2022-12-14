@@ -31,10 +31,18 @@ function displayBooks() {
     for (let bookNumber in myLibrary) {
         let cardDiv = document.createElement("div");
 
+
         let tileDiv = document.createElement("div");
         let authorDiv = document.createElement("div");
         let pagesDiv = document.createElement("div");
-        let readDiv = document.createElement("div");
+        let readDiv = document.createElement("button");
+        let removeButton = document.createElement("button")
+
+        tileDiv.setAttribute('id', 'titleDiv' + bookNumber.toString());
+
+        removeButton.textContent = "Remove";
+        removeButton.setAttribute('id', 'removeButton' + bookNumber.toString());
+        removeButton.addEventListener("click", removeBook);
 
         tileDiv.textContent = myLibrary[bookNumber].title;
         authorDiv.textContent = myLibrary[bookNumber].author;
@@ -47,6 +55,7 @@ function displayBooks() {
         cardDiv.appendChild(authorDiv);
         cardDiv.appendChild(pagesDiv);
         cardDiv.appendChild(readDiv);
+        cardDiv.appendChild(removeButton);
 
         mainContainer.appendChild(cardDiv);
 
@@ -56,14 +65,32 @@ function displayBooks() {
 }
 
 function submit(event, title, author, pages, read) {
-
+    if (read === true) {
+        read = 'Read';
+    } else {
+        read = "Not Read";
+    }
     addBookToLibrary(title, author, pages, read);
     event.preventDefault();
 
 
 }
 
+
+function removeBook() {
+    let id = this.id.toString().slice(-1);
+    let selector = '#titleDiv' + id;
+    let bookName = document.querySelector(selector).textContent;
+    let isTitle = (element) => element.title===bookName;
+    let bookIndex = myLibrary.findIndex(isTitle);
+    myLibrary.splice(bookIndex,1);
+    displayBooks();
+
+}
+
+
 function createForm() {
+
     let formDiv = document.createElement('form');
 
 
