@@ -2,11 +2,11 @@ const mainContainer = document.querySelector('.main-container');
 const addBookButton = document.querySelector('#addBook');
 const overlay = document.querySelector('#overlay');
 const form = document.querySelector('.pop-up-form');
-const formSubmitButton = document.querySelector('#submitButton');
-const titleDiv = document.querySelector('#title');
-const authorDiv = document.querySelector('#author');
-const pagesDiv = document.querySelector('#pages');
-const readDiv = document.querySelector('#read');
+const formSubmitButton = document.querySelector('#formSubmitButton');
+const titleDiv = document.querySelector('#formTitle');
+const authorDiv = document.querySelector('#formAuthor');
+const pagesDiv = document.querySelector('#formPages');
+const readDiv = document.querySelector('#formRead');
 
 
 let myLibrary = [];
@@ -30,10 +30,6 @@ function addBookToLibrary(title, author, pages, read) {
 
     let bookDiv = createBookCard(title, author, pages, read);
     mainContainer.appendChild(bookDiv);
-}
-
-function clearDiv(div) {
-    div.innerHTML = ""
 }
 
 
@@ -72,19 +68,6 @@ function createBookCard(title, author, pages, read) {
     return cardDiv;
 }
 
-function submit(title, author, pages, read) {
-    if (read === true) {
-        read = 'Read';
-    } else {
-        read = "Not Read";
-    }
-    addBookToLibrary(title, author, pages, read);
-    console.log(event)
-    overlay.classList.remove('active');
-    form.classList.remove('active');
-
-
-}
 
 function ChangeReadStatus() {
     let id = this.id.toString().substring(0, this.id.toString().length - 10);
@@ -138,7 +121,17 @@ overlay.addEventListener('click', () => {
 })
 
 
-formSubmitButton.addEventListener('click', function (e) {
-    submit(titleDiv.value, authorDiv.value, pagesDiv.value, document.querySelector('#read').checked);
+form.addEventListener('submit', function (e) {
+    let read = false
     e.preventDefault();
+    if (readDiv.value === true) {
+        read = 'Read';
+    } else {
+        read = "Not Read";
+    }
+    addBookToLibrary(titleDiv.value, authorDiv.value, pagesDiv.value, read);
+
+    overlay.classList.remove('active');
+    form.classList.remove('active');
+    alert("Ta dah!")
 })
