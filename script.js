@@ -23,6 +23,17 @@ Book.prototype.info = function () {
     return (`${this.title} by ${this.author}, ${this.pages}. pages read = ${this.read}`);
 }
 
+function bookExists(title) {
+    let doesExist;
+    for (let bookNumber in myLibrary) {
+        doesExist = (myLibrary[bookNumber].title === title);
+        if (doesExist === true) {
+
+            return doesExist;
+        }
+    }
+}
+
 function addBookToLibrary(title, author, pages, read) {
 
     let book = new Book(title, author, pages, read);
@@ -122,16 +133,21 @@ overlay.addEventListener('click', () => {
 
 
 form.addEventListener('submit', function (e) {
-    let read = false
     e.preventDefault();
+    let read
     if (readDiv.value === true) {
         read = 'Read';
     } else {
         read = "Not Read";
     }
+    if (bookExists(titleDiv.value) === true) {
+        alert(titleDiv.value + " is book already in library!")
+        return;
+    }
     addBookToLibrary(titleDiv.value, authorDiv.value, pagesDiv.value, read);
 
     overlay.classList.remove('active');
     form.classList.remove('active');
-    alert("Ta dah!")
+
+
 })
