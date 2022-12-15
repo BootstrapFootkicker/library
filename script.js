@@ -87,17 +87,25 @@ function submit(title, author, pages, read) {
 }
 
 function ChangeReadStatus() {
-    let id = this.id.toString().slice(-1);
-    let selector = '#titleDiv' + id;
-    let bookName = document.querySelector(selector).textContent;
+    let id = this.id.toString().substring(0, this.id.toString().length - 10);
+    console.log(id);
+    let selector = '#' + id;
+    console.log(selector);
+    let readButton = document.querySelector(selector + 'toggleRead');
+    let bookName = document.querySelector(selector + 'titleDiv').textContent;
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
     if (myLibrary[bookIndex].read === 'Read') {
         myLibrary[bookIndex].read = "Not Read"
+        readButton.textContent = "Not Read"
+        console.log(myLibrary);
+
     } else {
         myLibrary[bookIndex].read = "Read";
+        readButton.textContent = "Read"
+        console.log(myLibrary);
     }
-    //  displayBooks();
+
 }
 
 function removeBook() {
@@ -107,7 +115,7 @@ function removeBook() {
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
     myLibrary.splice(bookIndex, 1);
-//    displayBooks();
+
 
 }
 
