@@ -52,6 +52,11 @@ function createBookCard(title, author, pages, read) {
     let tileDiv = document.createElement("div");
     let authorDiv = document.createElement("div");
     let pagesDiv = document.createElement("div");
+
+    let buttonGroup = document.createElement("div");
+    buttonGroup.setAttribute('id',title+'ButtonGroup')
+    buttonGroup.classList.add('button-group')
+
     let readDiv = document.createElement("button");
     let removeButton = document.createElement("button")
 
@@ -74,8 +79,12 @@ function createBookCard(title, author, pages, read) {
     cardDiv.appendChild(tileDiv);
     cardDiv.appendChild(authorDiv);
     cardDiv.appendChild(pagesDiv);
-    cardDiv.appendChild(readDiv);
-    cardDiv.appendChild(removeButton);
+
+    buttonGroup.appendChild(readDiv);
+    buttonGroup.appendChild(removeButton);
+
+    cardDiv.appendChild(buttonGroup);
+
     return cardDiv;
 }
 
