@@ -109,12 +109,15 @@ function ChangeReadStatus() {
 }
 
 function removeBook() {
-    let id = this.id.toString().slice(-1);
-    let selector = '#titleDiv' + id;
-    let bookName = document.querySelector(selector).textContent;
+    let id = this.id.toString().substring(0, this.id.toString().length - 12);
+    let selector = '#' + id;
+    let cardDiv = document.querySelector(selector + 'Card');
+    let bookName = document.querySelector(selector + 'titleDiv').textContent;
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
+    cardDiv.remove();
     myLibrary.splice(bookIndex, 1);
+    console.log(myLibrary)
 
 
 }
