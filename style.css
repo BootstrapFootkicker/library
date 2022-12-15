@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .main-container {
     display: grid;
@@ -9,6 +13,7 @@
     justify-content: center;
     padding: 100px;
     gap: 40px;
+    background-color: #F1F6F5;
 
 
 }
@@ -21,33 +26,37 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
+    background-color: #82C3EC;
+    border-radius: 25px;
 
 
+}
+
+.book-card button{
+    width: 100%;
 }
 
 .pop-up-form {
     display: flex;
     flex-direction: column;
     border: solid black 2px;
-    padding: 20px;
+    padding: 30px;
     gap: 20px;
+    align-items: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    height: 35%;
-    width: 10%;
+    height: 300px;
+    width: 246px;
     background-color: #F1F6F5;
     z-index: 10;
     transition: 200ms ease-in-out;
+    border-radius: 25px;
 
 
 }
 
-label {
-    display: flex;
-    gap: 10px;
-}
 
 #overlay {
     position: fixed;
@@ -71,3 +80,62 @@ label {
 .pop-up-form.active {
     transform: translate(-50%, -50%) scale(1);
 }
+
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+
+
+}
+
+.formReadDiv {
+    display: flex;
+    gap: 20px;
+}
+
+.formTitleDiv, .formPagesDiv, .formAuthorDiv, .formSubmitDiv {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    justify-content: center;
+
+
+}
+
+
+input[type='text'], input[type='number'], input[type='submit'] {
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+}
+
+
+.formSubmitDiv {
+    height: 30%;
+}
+
+
+input[type=submit] {
+    /*fixes submit sizing issue on safari*/
+    -webkit-appearance: none;
+
+    background-color: #4CAF50;
+
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+
