@@ -1,13 +1,36 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Gentium Book Basic', serif;
+    font-size: 2rem;
+}
+
+#addBook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #181D31;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 5vh;
+    background-color: #82C3EC;
+    box-shadow: 0 5px 5px -5px #333;
+    position: relative;
+
+
 }
 
 .main-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
     grid-template-rows: repeat(auto-fill, 400px);
-    height: 100vh;
+    height: 80vh;
     grid-auto-columns: 250px;
     grid-auto-rows: 400px;
     justify-content: center;
@@ -41,10 +64,9 @@ body {
     flex-direction: column;
 
 
-
 }
 
-.book-card button {
+.book-card button, .header button {
     width: 100%;
     color: white;
     padding: 5px 32px;
@@ -57,6 +79,10 @@ body {
     border-radius: 5px;
 
     border: none;
+}
+
+.header button {
+    width: 8%;
 }
 
 .pop-up-form {
@@ -76,6 +102,7 @@ body {
     z-index: 10;
     transition: 200ms ease-in-out;
     border-radius: 25px;
+    font-size: 15px;
 
 
 }
@@ -161,11 +188,28 @@ input[type=submit] {
 }
 
 
-
-.notRead{
+.notRead {
     background-color: red;;
 }
 
-.read{
+.read {
     background-color: green;
 }
+
+.footer {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    background-color: #82C3EC;
+    box-shadow: 0 -5px 5px -5px #333;
+
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+}
+
