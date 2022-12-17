@@ -54,7 +54,7 @@ function createBookCard(title, author, pages, read) {
     let pagesDiv = document.createElement("div");
 
     let buttonGroup = document.createElement("div");
-    buttonGroup.setAttribute('id',title+'ButtonGroup')
+    buttonGroup.setAttribute('id', title + 'ButtonGroup')
     buttonGroup.classList.add('button-group')
 
     let readDiv = document.createElement("button");
@@ -68,6 +68,12 @@ function createBookCard(title, author, pages, read) {
 
     readDiv.setAttribute('id', title + 'toggleRead');
     readDiv.addEventListener("click", ChangeReadStatus);
+
+    if(read==='Read'){
+        readDiv.classList.add('read')
+    }else{
+        readDiv.classList.add('notRead')
+    }
 
     tileDiv.textContent = title
     authorDiv.textContent = author;
@@ -98,14 +104,19 @@ function ChangeReadStatus() {
     let bookName = document.querySelector(selector + 'titleDiv').textContent;
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
+
     if (myLibrary[bookIndex].read === 'Read') {
         myLibrary[bookIndex].read = "Not Read"
         readButton.textContent = "Not Read"
+        readButton.classList.remove('read')
+        readButton.classList.add('notRead')
         console.log(myLibrary);
 
     } else {
         myLibrary[bookIndex].read = "Read";
         readButton.textContent = "Read"
+        readButton.classList.remove('notRead')
+        readButton.classList.add('read')
         console.log(myLibrary);
     }
 
@@ -144,7 +155,7 @@ overlay.addEventListener('click', () => {
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     let read
-    if (readDiv.value === true) {
+    if (readDiv.checked === true) {
         read = 'Read';
     } else {
         read = "Not Read";
@@ -153,6 +164,7 @@ form.addEventListener('submit', function (e) {
         alert(titleDiv.value + " is book already in library!")
         return;
     }
+    console.log(read);
     addBookToLibrary(titleDiv.value, authorDiv.value, pagesDiv.value, read);
 
     overlay.classList.remove('active');

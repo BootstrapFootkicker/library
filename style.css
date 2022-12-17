@@ -55,7 +55,7 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-    background-color: #4CAF50;
+
     border: none;
 }
 
@@ -162,3 +162,10 @@ input[type=submit] {
 
 
 
+.notRead{
+    background-color: red;;
+}
+
+.read{
+    background-color: green;
+}
