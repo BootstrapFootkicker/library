@@ -46,7 +46,7 @@ function addBookToLibrary(title, author, pages, read) {
 
 function createBookCard(title, author, pages, read) {
     let cardDiv = document.createElement("div");
-    cardDiv.setAttribute('id', title + 'Card');
+    cardDiv.setAttribute('id', (title + 'Card').replace(/\s+/g,''));
 
 
     let tileDiv = document.createElement("div");
@@ -54,19 +54,19 @@ function createBookCard(title, author, pages, read) {
     let pagesDiv = document.createElement("div");
 
     let buttonGroup = document.createElement("div");
-    buttonGroup.setAttribute('id', title + 'ButtonGroup')
+    buttonGroup.setAttribute('id', (title + 'ButtonGroup').replace(/\s+/g,''))
     buttonGroup.classList.add('button-group')
 
     let readDiv = document.createElement("button");
     let removeButton = document.createElement("button")
 
-    tileDiv.setAttribute('id', title + 'titleDiv');
+    tileDiv.setAttribute('id', (title + 'titleDiv').replace(/\s+/g,''));
 
     removeButton.textContent = "Remove";
-    removeButton.setAttribute('id', title + 'removeButton');
+    removeButton.setAttribute('id', (title + 'removeButton').replace(/\s+/g,''));
     removeButton.addEventListener("click", removeBook);
 
-    readDiv.setAttribute('id', title + 'toggleRead');
+    readDiv.setAttribute('id', (title + 'toggleRead').replace(/\s+/g,''));
     readDiv.addEventListener("click", ChangeReadStatus);
 
     if(read==='Read'){
@@ -100,8 +100,9 @@ function ChangeReadStatus() {
     console.log(id);
     let selector = '#' + id;
     console.log(selector);
-    let readButton = document.querySelector(selector + 'toggleRead');
-    let bookName = document.querySelector(selector + 'titleDiv').textContent;
+    let readButton = document.querySelector((selector + 'toggleRead').replace(/\s+/g,''));
+    console.log((selector + 'toggleRead').replace(/\s+/g,''));
+    let bookName = document.querySelector((selector + 'titleDiv').replace(/\s+/g,'')).textContent;
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
 
@@ -125,8 +126,8 @@ function ChangeReadStatus() {
 function removeBook() {
     let id = this.id.toString().substring(0, this.id.toString().length - 12);
     let selector = '#' + id;
-    let cardDiv = document.querySelector(selector + 'Card');
-    let bookName = document.querySelector(selector + 'titleDiv').textContent;
+    let cardDiv = document.querySelector((selector + 'Card').replace(/\s+/g,''));
+    let bookName = document.querySelector((selector + 'titleDiv').replace(/\s+/g,'')).textContent;
     let isTitle = (element) => element.title === bookName;
     let bookIndex = myLibrary.findIndex(isTitle);
     cardDiv.remove();
